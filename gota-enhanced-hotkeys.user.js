@@ -300,6 +300,18 @@
     // Party Code Copy Enhancement
     // =====================
     function enhancePartyCodeCopyButton() {
+        function cleanPartyCode(text) {
+            // Remove any /j or /join at the start, keep only '/join CODE'
+            let match = text.trim().match(/^(?:\/j(?:oin)?\s+)?([A-Za-z0-9]{5})$/i);
+            if (match) return `/join ${match[1]}`;
+            // If already in '/join CODE' format, keep as is
+            match = text.trim().match(/^\/join\s+([A-Za-z0-9]{5})$/i);
+            if (match) return `/join ${match[1]}`;
+            // If text contains /j or /join before code
+            match = text.trim().match(/(?:\/j(?:oin)?\s+)?([A-Za-z0-9]{5})/i);
+            if (match) return `/join ${match[1]}`;
+            return text.trim();
+        }
         function attachCopyHandler() {
             const copyBtn = document.querySelector('#popup-party-code button');
             const codeInput = document.getElementById('party-code-input');
@@ -308,7 +320,7 @@
                 copyBtn.addEventListener('click', function() {
                     const latestInput = document.getElementById('party-code-input');
                     if (latestInput && latestInput.value) {
-                        const text = `/join ${latestInput.value}`;
+                        const text = cleanPartyCode(latestInput.value);
                         navigator.clipboard.writeText(text);
                     }
                 });
@@ -321,7 +333,7 @@
             const popup = document.getElementById('popup-party-code');
             const codeInput = document.getElementById('party-code-input');
             if (popup && codeInput && popup.style.display !== 'none' && codeInput.value) {
-                const text = `/join ${codeInput.value}`;
+                const text = cleanPartyCode(codeInput.value);
                 navigator.clipboard.writeText(text);
             }
         });
