@@ -17,7 +17,7 @@ This userscript adds more hotkeys to Gota.io. You can set your own keys for acti
 - Click a button to set a new key for any action
 
 ## Credits
-- ChatGPT 
+- ChatGPT - made fully by AI
 
 ## License
 MIT
