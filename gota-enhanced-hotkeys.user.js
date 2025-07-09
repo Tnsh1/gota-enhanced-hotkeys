@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Gota.io Enhanced Hotkeys
-// @version      1.0.2
+// @version      1.0.3
 // @description  Adds more useful and customizable hotkeys to Gota.io
 // @author       Tenshi
 // @match        https://gota.io/web/*
